@@ -10,29 +10,25 @@
 # The following tasks are tests and require Python on the managed node
 - hosts: vagrant
   tasks:
+    - debug:
+       msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
 
- - debug:
-     msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+    - debug:
+        msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
+      when: ansible_default_ipv4.gateway is defined
 
- - debug:
-     msg: "System {{ inventory_hostname }} has gateway {{ ansible_default_ipv4.gateway }}"
-   when: ansible_default_ipv4.gateway is defined
+    - shell: /usr/bin/uptime
+      register: result
 
- - shell: /usr/bin/uptime
-   register: result
+    - debug:
+       var: result
+       verbosity: 2
 
- - debug:
-     var: result
-     verbosity: 2
+    - name: Display all variables/facts known for a host
+      debug:
+        var: hostvars[inventory_hostname]
+        verbosity: 4
 
- - name: Display all variables/facts known for a host
-   debug:
-     var: hostvars[inventory_hostname]
-     verbosity: 4
-
-  - name: Print distribution
-    raw: cat /etc/os-release | grep -oP "^ID=\K.*" | tr -d "\n" | tr -d "\r" | tr -d "\""
-    register: distribution
-
-  - debug:
-      var: distribution.stdout
+    - name: Print distribution
+      debug:
+        var: distribution.stdout
