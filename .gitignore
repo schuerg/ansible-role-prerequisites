@@ -1,0 +1,9 @@
+# Ansible
+*.retry
+ansible/roles/schuerg.*
+
+# Vagrant
+.vagrant/
+
+# Logfiles
+*.log
