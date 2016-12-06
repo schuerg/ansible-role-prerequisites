@@ -27,6 +27,11 @@ Example Playbook
       roles:
          - { role: schuerg.prerequisites }
 
+Feedback
+--------
+
+Bug reports, feature requests, pull requests and feedback in general is always welcome!
+
 License
 -------
 
