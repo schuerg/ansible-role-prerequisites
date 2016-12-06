@@ -1,0 +1,29 @@
+---
+
+# The tasks defined here install the requirements for Ansible provisioning on
+# the managed nodes.
+# http://docs.ansible.com/ansible/intro_installation.html#managed-node-requirements
+
+- name: Get the Linux distribution name using a raw command
+  raw: cat /etc/os-release | grep -oP "^ID=\K.*"
+  register: distribution
+
+- name: Install Ansible requirements for Fedora
+  raw: dnf install -y {{ item }}
+  with_items: '{{ fedora_packages }}'
+  when: distribution.stdout.find('fedora') != -1
+
+- name: Install Ansible requirements for Centos
+  raw: yum install -y {{ item }}
+  with_items: '{{ centos_packages }}'
+  when: distribution.stdout.find('centos') != -1
+
+- name: Install Ansible requirements for Ubuntu
+  raw: apt-get install -y {{ item }}
+  with_items: '{{ ubuntu_packages }}'
+  when: distribution.stdout.find('ubuntu') != -1
+
+- name: Install Ansible requirements for Debian
+  raw: apt-get install -y {{ item }}
+  with_items: '{{ debian_packages }}'
+  when: distribution.stdout.find('debian') != -1

@@ -1,0 +1,20 @@
+---
+# defaults file for prerequisites
+
+fedora_packages:
+  - python
+  - python-simplejson
+  - libselinux-python
+  - python-dnf
+
+centos_packages:
+  - python
+  - libselinux-python
+
+debian_packages:
+  - python
+  - python-simplejson
+
+ubuntu_packages:
+  - python
+  - python-simplejson
