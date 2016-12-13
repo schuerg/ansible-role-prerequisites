@@ -2,19 +2,23 @@
 # defaults file for prerequisites
 
 fedora_packages:
+  - sudo
   - python
   - python-simplejson
   - libselinux-python
   - python-dnf
 
 centos_packages:
+  - sudo
   - python
   - libselinux-python
 
 debian_packages:
+  - sudo
   - python
   - python-simplejson
 
 ubuntu_packages:
+  - sudo
   - python
   - python-simplejson
