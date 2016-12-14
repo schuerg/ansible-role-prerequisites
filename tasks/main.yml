@@ -9,12 +9,12 @@
   register: distribution
 
 - name: Install Ansible requirements for Fedora
-  raw: dnf install -y {{ item }}
+  raw: dnf install -y --allowerasing {{ item }}
   with_items: '{{ fedora_packages }}'
   when: distribution.stdout.find('fedora') != -1
 
 - name: Install Ansible requirements for Centos
-  raw: yum install -y {{ item }}
+  raw: yum install -y --allowerasing {{ item }}
   with_items: '{{ centos_packages }}'
   when: distribution.stdout.find('centos') != -1
 
