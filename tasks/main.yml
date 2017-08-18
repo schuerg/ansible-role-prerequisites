@@ -3,10 +3,17 @@
 # provisioning on the managed nodes.
 # http://docs.ansible.com/ansible/intro_installation.html#managed-node-requirements
 
+- name: Check if file exists /var/log/schuerg.prerequisites.log
+  raw: test -f /var/log/schuerg.prerequisites.log ; echo $?
+  register: file
+- debug:
+    msg: "{{file.stdout | int}}"
+    verbosity: 1
+
 - name: Check file stats of /var/log/schuerg.prerequisites.log
-  stat:
-    path: /var/log/schuerg.prerequisites.log
+  raw: stat -c %Y /var/log/schuerg.prerequisites.log
   register: st
+  when: file.stdout | int == 0
 - debug: var=st verbosity=4
 
 - name: Check current time as Unix timestamp
@@ -16,5 +23,5 @@
 
 - name: Perform the schuerg.prerequisites tasks only if needed
   include: setup.yml
-  when: (st.stat.exists == false) or
-        ((st.stat.mtime + 86400) < timestamp.stdout | int)
+  when: (file.stdout | int == 1) or
+        (((st.stat.stdout | int) + 86400) < timestamp.stdout | int)
