@@ -24,4 +24,5 @@
 - name: Perform the schuerg.prerequisites tasks only if needed
   include: setup.yml
   when: (file.stdout | int == 1) or
-        (((st.stat.stdout | int) + 86400) < timestamp.stdout | int)
+        (((st.stdout | int) + 86400) < timestamp.stdout | int)
+
