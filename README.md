@@ -35,7 +35,7 @@ Bug reports, feature requests, pull requests and feedback in general is always w
 License
 -------
 
-[GPLv3](LICENSE)
+[MIT](LICENSE)
 
 Author Information
 ------------------
