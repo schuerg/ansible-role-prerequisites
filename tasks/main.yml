@@ -6,17 +6,20 @@
 - name: Check if file exists /var/log/schuerg.prerequisites.log
   raw: test -f /var/log/schuerg.prerequisites.log ; echo $?
   register: file
+  changed_when: False
 - debug: var=file.stdout verbosity=2
 
 - name: Check file stats of /var/log/schuerg.prerequisites.log
   raw: stat -c %Y /var/log/schuerg.prerequisites.log
   register: st
+  changed_when: False
   when: file.stdout | int == 0
 - debug: var=st.stdout verbosity=2
 
 - name: Check current time as Unix timestamp
   raw: date +%s
   register: timestamp
+  changed_when: False
 - debug: var=timestamp.stdout verbosity=2
 
 - name: Perform the schuerg.prerequisites tasks only if needed

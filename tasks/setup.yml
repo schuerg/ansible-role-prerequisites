@@ -15,7 +15,7 @@
   when: distribution.stdout.find('fedora') != -1
 
 - name: Install Ansible requirements for Centos
-  raw: yum install -y --allowerasing {{ item }}
+  raw: yum install -y {{ item }}
   with_items: '{{ centos_packages }}'
   when: distribution.stdout.find('centos') != -1
 
