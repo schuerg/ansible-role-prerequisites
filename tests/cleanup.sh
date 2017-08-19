@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Simon Schürg (simon@schuerg.net)
 
 # Exit on error. Append || true if you expect an error.
 set -o errexit
@@ -12,10 +14,11 @@ set -o pipefail
 #set -o xtrace
 
 # Set magic variables for current file, directory, os, etc.
-__dir="$(cd "$(dirname "${BASH_SOURCE[${__b3bp_tmp_source_idx:-0}]}")" && pwd)"
-__file="${__dir}/$(basename "${BASH_SOURCE[${__b3bp_tmp_source_idx:-0}]}")"
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 __base="$(basename ${__file} .sh)"
 
+# allow to run this script from every directory
 cd ${__dir}
 
 vagrant halt --force
@@ -24,4 +27,3 @@ vagrant destroy --force
 rm -r .vagrant
 rm *.log
 rm *.retry
-

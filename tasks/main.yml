@@ -6,23 +6,20 @@
 - name: Check if file exists /var/log/schuerg.prerequisites.log
   raw: test -f /var/log/schuerg.prerequisites.log ; echo $?
   register: file
-- debug:
-    msg: "{{file.stdout | int}}"
-    verbosity: 1
+- debug: var=file.stdout verbosity=2
 
 - name: Check file stats of /var/log/schuerg.prerequisites.log
   raw: stat -c %Y /var/log/schuerg.prerequisites.log
   register: st
   when: file.stdout | int == 0
-- debug: var=st verbosity=4
+- debug: var=st.stdout verbosity=2
 
 - name: Check current time as Unix timestamp
   raw: date +%s
   register: timestamp
-- debug: var=timestamp verbosity=4
+- debug: var=timestamp.stdout verbosity=2
 
 - name: Perform the schuerg.prerequisites tasks only if needed
   include: setup.yml
   when: (file.stdout | int == 1) or
         (((st.stdout | int) + 86400) < timestamp.stdout | int)
-
