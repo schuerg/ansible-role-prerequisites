@@ -8,7 +8,7 @@
 Vagrant.configure("2") do |config|
 
   config.vm.define "fedora" do |fedora|
-    fedora.vm.box = "fedora/25-cloud-base"
+    fedora.vm.box = "fedora/26-cloud-base"
     fedora.vm.network "private_network", ip: "172.16.100.10"
 
     fedora.vm.synced_folder ".", "/vagrant", type: "rsync",
@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "debian" do |debian|
-    debian.vm.box = "debian/jessie64"
+    debian.vm.box = "debian/stretch64"
     debian.vm.network "private_network", ip: "172.16.100.40"
 
     debian.vm.synced_folder ".", "/vagrant", type: "rsync",
