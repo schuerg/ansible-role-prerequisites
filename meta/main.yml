@@ -30,6 +30,7 @@ galaxy_info:
     - requirements
     - python
     - raw
+    - python-simplejson
 
 dependencies: []
   # List your role dependencies here, one per line.
