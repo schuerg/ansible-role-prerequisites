@@ -2,6 +2,7 @@ Ansible Role: Prerequisites
 ===========================
 
 Installs prerequisites needed for ansible provisioning.
+See [https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#managed-node-requirements](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#managed-node-requirements)
 
 This role is also published on [Ansible Galaxy](https://galaxy.ansible.com/schuerg/prerequisites/).
 
