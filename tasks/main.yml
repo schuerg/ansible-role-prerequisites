@@ -4,11 +4,14 @@
 - name: Get the Linux distribution name using a raw command
   raw: cat /etc/os-release | grep -oP "^ID=\K.*"
   register: distribution
+  changed_when: false
 
 - name: Install Ansible requirements for Fedora
-  raw: dnf install -y --allowerasing {{ item }}
+  raw: LANG=C dnf install -y --allowerasing {{ item }}
   with_items: '{{ fedora_packages }}'
   when: distribution.stdout.find('fedora') != -1
+  register: prerequisites_install_res
+  changed_when: "'Nothing to do.' not in prerequisites_install_res.stdout"
 
 - name: Install Ansible requirements for Centos
   raw: yum install -y {{ item }}
