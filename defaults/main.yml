@@ -2,28 +2,22 @@
 # defaults file for prerequisites
 
 fedora_packages:
-  - sudo
   - python3
-  - python3-simplejson
-  - libselinux-python3
   - python3-dnf
+  - libselinux-python3
 
 centos_packages:
-  - sudo
   - python3
+  - python3-dnf
   - libselinux-python3
 
 debian_packages:
-  - sudo
   - python3
-  - python3-simplejson
+  - python3-apt
 
 ubuntu_packages:
-  - sudo
   - python3
-  - python3-simplejson
+  - python3-apt
 
 alpine_packages:
-  - sudo
   - python3
-  - py3-simplejson

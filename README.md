@@ -1,8 +1,8 @@
 Ansible Role: Prerequisites
 ===========================
 
-Installs prerequisites needed for ansible provisioning.
-See [https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#managed-node-requirements](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#managed-node-requirements)
+This is the ultimate prerequisites role needed for ansible provisioning.
+It prepares the managed node for ansible tasks, e.g. it installs `python3` on the managed node via an ansible raw command.
 
 This role is also published on [Ansible Galaxy](https://galaxy.ansible.com/schuerg/prerequisites/).
 

@@ -1,28 +1,31 @@
 ---
-# The tasks defined in this role provide the requirements for Ansible
-# provisioning on the managed nodes.
-# http://docs.ansible.com/ansible/intro_installation.html#managed-node-requirements
+# Perform the actual prerequisites tasks
 
-- name: Check if file exists /var/log/schuerg.prerequisites.log
-  raw: test -f /var/log/schuerg.prerequisites.log ; echo $?
-  register: file
-  changed_when: False
-- debug: var=file.stdout verbosity=2
+- name: Get the Linux distribution name using a raw command
+  raw: cat /etc/os-release | grep -oP "^ID=\K.*"
+  register: distribution
 
-- name: Check file stats of /var/log/schuerg.prerequisites.log
-  raw: stat -c %Y /var/log/schuerg.prerequisites.log
-  register: st
-  changed_when: False
-  when: file.stdout | int == 0
-- debug: var=st.stdout verbosity=2
+- name: Install Ansible requirements for Fedora
+  raw: dnf install -y --allowerasing {{ item }}
+  with_items: '{{ fedora_packages }}'
+  when: distribution.stdout.find('fedora') != -1
 
-- name: Check current time as Unix timestamp
-  raw: date +%s
-  register: timestamp
-  changed_when: False
-- debug: var=timestamp.stdout verbosity=2
+- name: Install Ansible requirements for Centos
+  raw: yum install -y {{ item }}
+  with_items: '{{ centos_packages }}'
+  when: distribution.stdout.find('centos') != -1
 
-- name: Perform the schuerg.prerequisites tasks only if needed
-  include: setup.yml
-  when: (file.stdout | int == 1) or
-        (((st.stdout | int) + 86400) < timestamp.stdout | int)
+- name: Install Ansible requirements for Ubuntu
+  raw: apt-get install -y {{ item }}
+  with_items: '{{ ubuntu_packages }}'
+  when: distribution.stdout.find('ubuntu') != -1
+
+- name: Install Ansible requirements for Debian
+  raw: apt-get install -y {{ item }}
+  with_items: '{{ debian_packages }}'
+  when: distribution.stdout.find('debian') != -1
+
+- name: Install Ansible requirements for Alpine
+  raw: apk --no-cache add {{ item }}
+  with_items: '{{ alpine_packages }}'
+  when: distribution.stdout.find('alpine') != -1

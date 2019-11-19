@@ -27,11 +27,11 @@ galaxy_info:
   galaxy_tags:
     - prerequisites
     - requirements
+    - python3
+    - selinux
     - common
     - basic
-    - python
     - raw
-    - python-simplejson
 
 dependencies: []
   # List your role dependencies here, one per line.
