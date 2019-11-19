@@ -8,7 +8,8 @@
 Vagrant.configure("2") do |config|
 
   config.vm.define "fedora" do |fedora|
-    fedora.vm.box = "fedora/26-cloud-base"
+    fedora.vm.box = "fedora/31-cloud-base"
+    fedora.vm.box_version = "31.20191023.0"
     fedora.vm.network "private_network", ip: "172.16.100.10"
 
     fedora.vm.synced_folder ".", "/vagrant", type: "rsync",
@@ -21,7 +22,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "centos" do |centos|
-    centos.vm.box = "centos/7"
+    centos.vm.box = "centos/8"
+    centos.vm.box_version = "1905.1"
     centos.vm.network "private_network", ip: "172.16.100.20"
 
     centos.vm.synced_folder ".", "/vagrant", type: "rsync",
@@ -34,7 +36,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "ubuntu" do |ubuntu|
-    ubuntu.vm.box = "ubuntu/xenial64"
+    ubuntu.vm.box = "ubuntu/bionic64"
     ubuntu.vm.network "private_network", ip: "172.16.100.30"
 
     ubuntu.vm.synced_folder ".", "/vagrant", type: "rsync",
@@ -47,7 +49,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "debian" do |debian|
-    debian.vm.box = "debian/stretch64"
+    debian.vm.box = "debian/buster64"
     debian.vm.network "private_network", ip: "172.16.100.40"
 
     debian.vm.synced_folder ".", "/vagrant", type: "rsync",
