@@ -17,18 +17,26 @@
   raw: yum install -y {{ item }}
   with_items: '{{ centos_packages }}'
   when: distribution.stdout.find('centos') != -1
+  register: prerequisites_install_res
+  changed_when: "'Nothing to do.' not in prerequisites_install_res.stdout"
 
 - name: Install Ansible requirements for Ubuntu
   raw: apt-get install -y {{ item }}
   with_items: '{{ ubuntu_packages }}'
   when: distribution.stdout.find('ubuntu') != -1
+  register: prerequisites_install_res
+  changed_when: "'0 upgraded, 0 newly installed' not in prerequisites_install_res.stdout"
 
 - name: Install Ansible requirements for Debian
   raw: apt-get install -y {{ item }}
   with_items: '{{ debian_packages }}'
   when: distribution.stdout.find('debian') != -1
+  register: prerequisites_install_res
+  changed_when: "'0 upgraded, 0 newly installed' not in prerequisites_install_res.stdout"
 
 - name: Install Ansible requirements for Alpine
   raw: apk --no-cache add {{ item }}
   with_items: '{{ alpine_packages }}'
   when: distribution.stdout.find('alpine') != -1
+  register: prerequisites_install_res
+  changed_when: "'Installing' in prerequisites_install_res.stdout"
