@@ -3,3 +3,4 @@ fedora ansible_host=172.16.100.10
 centos ansible_host=172.16.100.20
 ubuntu ansible_host=172.16.100.30
 debian ansible_host=172.16.100.40
+alpine ansible_host=172.16.100.50
