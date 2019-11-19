@@ -28,6 +28,8 @@ galaxy_info:
   galaxy_tags:
     - prerequisites
     - requirements
+    - common
+    - basic
     - python
     - raw
     - python-simplejson
